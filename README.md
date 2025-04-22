@@ -19,6 +19,9 @@ Here's what Numgy looks like for now:
 ![Numgy Screenshot](assets/small_Overview.png)
 
 
+## What I have learned
+- I actually understood what is super(): It means go to the next class in MRO if method/ attribute not found in the current class
+
 
   
 
