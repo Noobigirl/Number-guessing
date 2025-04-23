@@ -5,7 +5,7 @@ import random
 class MyFrame(ctk.CTkFrame):
     def __init__(self, root, fg_color= "transparent",corner_radius= 0, **kwargs): 
         super().__init__( root, **kwargs) # allows me to recreate a frame with custom attributes
-        self.font= ctk.CTkFont(family= "Perfect Delight 1992", size= 45)
+        self.font= ctk.CTkFont(family= "Poppins ", size= 20)
         self.text= ctk.CTkLabel(self,
                                 text_color= "#fff", 
                                 font= self.font, 
@@ -22,7 +22,7 @@ class ButtonFrame(ctk.CTkFrame):
     def __init__(self, root, fg_color= "transparent",corner_radius= 0, **kwargs):
         super().__init__(root, **kwargs)
 
-        self.font = ctk.CTkFont(family= "Perfect Delight 1992", size= 45)
+        self.font = ctk.CTkFont(family= "Poppins ", size= 20)
         self.button = ctk.CTkButton(self, text= "Click me", fg_color= "blue", font= self.font, height= 75)
         self.button.grid(row = 0, column= 0)
 
@@ -30,7 +30,7 @@ class ButtonFrame(ctk.CTkFrame):
 class TrialFrame(ctk.CTkFrame):
     def __init__(self, root,**kwargs):
         super().__init__(master= root, **kwargs)
-        self.font = ctk.CTkFont(family= "Perfect Delight 1992", size= 25, slant= "italic")
+        self.font = ctk.CTkFont(family= "Poppins ", size= 15)
         
         # Label containing the number of trials left
         self.text = ctk.CTkLabel(self, text=" Number of trials left: ", font= self.font)
@@ -65,7 +65,7 @@ class MainApp(ctk.CTk):
             height= 155, 
             placeholder_text="00",
             justify= "center",
-            font= ctk.CTkFont(family= "Perfect Delight 1992", size=140),
+            font= ctk.CTkFont(family= "Poppins ", size=140),
             fg_color= "transparent",
             border_width= 0 # completely gets rid of the border
             )
@@ -79,7 +79,7 @@ class MainApp(ctk.CTk):
         self.buttonFrame.button.configure(command= self.getText)
 
         #Frame containing the number of trials left
-        self.trial = TrialFrame(self)
+        self.trial = TrialFrame(self, fg_color= "transparent")
         self.trial.grid(row= 3, column= 0)
     def getText(self):
         text = self.UserEntry.get()
