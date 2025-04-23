@@ -1,4 +1,9 @@
 import customtkinter as ctk 
+import random
+
+
+
+
 
 #------ main app -------
 class MainApp(ctk.CTk):
@@ -7,8 +12,17 @@ class MainApp(ctk.CTk):
         self.title("Numgy")
         self.geometry("500x550+700+200")
 
+        
+        # ---- Logic of the number guessing -----
+
+        MAX = 10
+        MIN = 0
+        toGuess = random.randint(MIN, MAX)
+        display = ctk.StringVar(value= f"Guess a number between \n {MIN} and {MAX}") # write notes on that
+
         # Fame containing the text
         self.textFrame = MyFrame(self, fg_color= "#5f5f5f", corner_radius= 7)
+        self.textFrame.text.configure(textvariable = display)
         self.textFrame.grid_columnconfigure(0, weight= 1)
         self.textFrame.grid(row= 0, column= 0, padx= 45, pady=10, sticky= "ew")
 
@@ -17,7 +31,7 @@ class MainApp(ctk.CTk):
             self,
             width= 200, 
             height= 155, 
-            placeholder_text="00"  
+            placeholder_text="00"
             )
         self.UserEntry.grid(row= 1, column = 0, padx= 45, pady= 10)
 
@@ -37,9 +51,16 @@ class MyFrame(ctk.CTkFrame):
         super().__init__( root, **kwargs) # allows me to recreate a frame with custom attributes
         #the font is not correctly set. You shoul use a CTkFont object
         self.font= ctk.CTkFont(family= "Perfect Delight 1992", size= 45)
-        self.text= ctk.CTkLabel(self, text="Guess the number", text_color= "#fff", font= self.font) 
+        self.text= ctk.CTkLabel(self,
+                                text_color= "#fff", 
+                                font= self.font, 
+                                height= 150, 
+                                anchor="center", # write notes on that
+                                justify= "center" # write notes on that
+
+                                ) 
         #sticky attribue allow to expand to the cell size
-        self.text.grid(row= 0, column= 0, padx=20, pady= 75, sticky= 'ew') 
+        self.text.grid(row= 0, column= 0, padx=20, pady= 15, sticky= 'ew') 
 
 #---- validation button ----
 class ButtonFrame(ctk.CTkFrame):
