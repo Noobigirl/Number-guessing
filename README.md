@@ -22,6 +22,9 @@ Here's what Numgy looks like for now:
 
 ## What I have learned
 - I actually understood what is super(): It means go to the next class in MRO if method/ attribute not found in the current class
+- I learned how to position text with the anchor and justify attributes
+- I learned how to use StringVar and textVariable
+- I learned how to get the content of an entry with .get() and how to delete it with .delete()
 
 
 
