@@ -17,6 +17,9 @@ class MyFrame(ctk.CTkFrame):
         #sticky attribue allow to expand to the cell size
         self.text.grid(row= 0, column= 0, padx=20, pady= 15, sticky= 'ew') 
 
+
+
+
 #---- validation button ----
 class ButtonFrame(ctk.CTkFrame):
     def __init__(self, root, fg_color= "transparent",corner_radius= 0, **kwargs):
@@ -51,6 +54,9 @@ class MainApp(ctk.CTk):
         MIN = 0
         self.toGuess = random.randint(MIN, MAX)
         display = ctk.StringVar(value= f"Guess a number between \n {MIN} and {MAX}") 
+        self.score = 0
+        self.trials = 3
+        self.guess = None
 
         # Fame containing the text
         self.textFrame = MyFrame(self, fg_color= "#5f5f5f", corner_radius= 7)
@@ -59,7 +65,7 @@ class MainApp(ctk.CTk):
         self.textFrame.grid(row= 0, column= 0, padx= 45, pady=10, sticky= "ew")
 
         # User entry
-        self.UserEntry = ctk.CTkEntry(
+        self.UserText = ctk.CTkEntry(
             self,
             width= 200, 
             height= 155, 
@@ -67,9 +73,9 @@ class MainApp(ctk.CTk):
             justify= "center",
             font= ctk.CTkFont(family= "Poppins ", size=140),
             fg_color= "transparent",
-            border_width= 0 # completely gets rid of the border
+            border_width= 0, # completely gets rid of the border
             )
-        self.UserEntry.grid(row= 1, column = 0, padx= 45, pady= 10)
+        self.UserText.grid(row= 1, column = 0, padx= 45, pady= 10)
 
         # Frame containing the button
         self.buttonFrame = ButtonFrame(self)
@@ -81,10 +87,19 @@ class MainApp(ctk.CTk):
         #Frame containing the number of trials left
         self.trial = TrialFrame(self, fg_color= "transparent")
         self.trial.grid(row= 3, column= 0)
+
+        # if int(self.guess) == self.toGuess:
+        #     self.score += 1
+        # print(self.toGuess)
+        # print(self.guess)
+        # print(self.score)
     def getText(self):
-        text = self.UserEntry.get()
+        self.guess = self.UserText.get()
         print(self.toGuess)
-        print(text)
+        print(self.guess)
+        
+
+    
 
 
 

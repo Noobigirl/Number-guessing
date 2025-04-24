@@ -11,6 +11,7 @@ It uses `customtkinter` to build a clean, modern interface (because, let’s be 
 - Random number generation
 - User-friendly GUI with input fields and feedback labels
 - Retry and reset functionality
+- trials left and score
 
 ## 📸 Preview
 
