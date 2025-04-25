@@ -8,10 +8,11 @@ It uses `customtkinter` to build a clean, modern interface (because, let’s be 
 
 
 ## 🔧 Features
-- Random number generation
-- User-friendly GUI with input fields and feedback labels
-- Retry and reset functionality
-- trials left and score
+- Random number generation ✅
+- User-friendly GUI with input fields and feedback labels ✅
+- Retry and reset functionality 🟧
+- trials left and score 🟧
+- give hints on the closeness to the true number ❌
 
 ## 📸 Preview
 
@@ -19,13 +20,19 @@ Here's what Numgy looks like for now:
 
 ![Numgy Screenshot](assets/small_Overview.png)
 
+Update : 25/04/2025
+I tried to "improve" the look and added sections for the score, alerts and trials left
+
+![Numgy Screenshot](asset/interface_v3.png)
+
 
 ## What I have learned
 - I actually understood what is super(): It means go to the next class in MRO if method/ attribute not found in the current class
 - I learned how to position text with the anchor and justify attributes
 - I learned how to use StringVar and textVariable
 - I learned how to get the content of an entry with .get() and how to delete it with .delete()
-
+- pack() is better that grid() if I only want to place stuff on the "same column"
+- I can't use multiple geometry managers on the same master frame
 
 
   
