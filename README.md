@@ -23,7 +23,7 @@ Here's what Numgy looks like for now:
 Update : 25/04/2025
 I tried to "improve" the look and added sections for the score, alerts and trials left
 
-![Numgy Screenshot](asset/interface_v3.png)
+![Numgy Screenshot](assets/interface_v3.png)
 
 
 ## What I have learned
