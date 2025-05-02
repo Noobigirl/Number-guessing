@@ -12,7 +12,7 @@ It uses `customtkinter` to build a clean, modern interface (because, let’s be 
 - User-friendly GUI with input fields and feedback labels ✅
 - Retry and reset functionality 🟧
 - trials left and score ✅
-- give hints on the closeness to the true number ❌
+- give hints on the closeness to the true number ✅
 
 ## 📸 Preview
 
@@ -33,6 +33,7 @@ I tried to "improve" the look and added sections for the score, alerts and trial
 - I learned how to get the content of an entry with .get() and how to delete it with .delete()
 - pack() is better that grid() if I only want to place stuff on the "same column"
 - I can't use multiple geometry managers on the same master frame
+- It is a better practice to separate large programes into several modules that will be imported
 
 
   

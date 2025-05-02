@@ -9,7 +9,7 @@ features to add:
 - increment the score for successfull guesses ✅
 - display the score ✅
 - force the user to only enter integers ✅
-- give hints to the user on how close they are to the true number ❌
+- give hints to the user on how close they are to the true number ✅
 """
 
 #------ main app -------
@@ -33,7 +33,6 @@ class MainApp(ctk.CTk):
         
         # ---- Frame containing the text----
         self.textFrame = appUI.NumberGuessingFrame(self, fg_color= "#5f5f5f", corner_radius= 7)
-        # instructions giving the range within which the number lies and the score
         self.textFrame.scoreText.configure(textvariable = self.score_text)
         self.textFrame.mainText.configure(textvariable = instruction) 
         self.textFrame.grid_columnconfigure(0, weight= 1)
@@ -57,6 +56,11 @@ class MainApp(ctk.CTk):
         self.trial = appUI.TrialFrame(self, fg_color= "transparent", width= 40, height=20)
         self.trial.text.configure(textvariable = self.trials_text)
         self.trial.pack( pady= (5,0))
+    
+    def erase_txt(self):
+        self.UserText.delete(0, "end") # erasing the entry 
+        # self.UserText.configure(placeholder_text= "00")
+
 
     def getText(self):
         """
@@ -65,15 +69,15 @@ class MainApp(ctk.CTk):
         """
         self.guess = self.UserText.get()
         try: 
-            int(self.guess)
+            self.guess= int(self.guess) # checking if the input is an integer
             self.incrementScore()
             # --- just to see what happens in he terminal
             print(self.toGuess)  
             print(self.guess)
-            self.UserText.delete(0, "end") # eraing the entry 
         except ValueError:
             self.alertText.set("You must enter an integer")
-            self.UserText.delete(0, "end") 
+        finally:
+            self.erase_txt() # erase the text and reset the placeholder no matter the exception
     
     def incrementScore(self):
         """
@@ -84,12 +88,19 @@ class MainApp(ctk.CTk):
         if int(self.guess) == self.toGuess:
             self.score += 1 
             self.toGuess = random.randint(self.MIN, self.MAX) # generate a new value if the user got the anser
+            self.alertText.set("Correct!")
             # future feature: increase the range of value each time the user gets a correct answer
             self.score_text.set(f"Score: {self.score}") # displays new score
         else:
-            self.alertText.set("incorrect") # notifies the user that their anser is incorrect
+            self.hint() # notifies the user that their anser is incorrect
             self.decrement_trials() # decrements the nubmer of trials left
             
+    def hint(self):
+        difference = self.toGuess - self.guess
+        if difference < 0:
+            self.alertText.set(f"Incorrect: the number is  smaller ")    
+        else: 
+            self.alertText.set(f"Incorrect: the number is  larger ")
     def decrement_trials(self):
         """
         function that decrements the number of trials left 
