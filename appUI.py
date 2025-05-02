@@ -63,13 +63,35 @@ class NumberGuessingFrame(ctk.CTkFrame):
         Geometry manager : grid
         """
         self.scoreText.grid(row =0, column= 0, padx= 10, sticky ="w") # label displaying  the score
-        self.mainText.grid(row= 1, column= 0, padx=20, pady= 15, sticky= 'ew') 
+        self.mainText.grid(row= 1, column= 0, padx=20, pady= 15, sticky= 'ew') # label displaying the instruction
+
+
+class UserEntry(ctk.CTkEntry):
+    """
+    Frame containing the entry widget
+    methods: 
+        create_widget
+        layout_widget
+    width = 175, height = 75, placeholder_text = "00"
+    """
+    def __init__(self, root,**kwargs):
+        self.font= set_font(100)
+        super().__init__(master= root, 
+        width= 175,
+        height= 75, 
+        placeholder_text= "00",
+        justify= "center", # default text
+        font= self.font,
+        fg_color= "transparent",
+        border_width= 0,  # completely gets rid of the border
+        **kwargs)
+
 
 
 #---- display alerts
 class AlertFrame(ctk.CTkFrame):
     """
-    Class containing the score and the range of number to guess
+    Class containing the  alert text
     methods: 
        create_widget
        layout_widget
@@ -96,9 +118,16 @@ class AlertFrame(ctk.CTkFrame):
 
 #---- validation button ----
 class ButtonFrame(ctk.CTkFrame):
+    """
+    Class containing the validation button
+    methods: 
+        create_widget
+        layout_widget
+        set_command
+    """
     def __init__(self, root, fg_color= "transparent",corner_radius= 0, **kwargs):
         super().__init__(root, **kwargs)
-        self.font = set_font(20)# setting the font of the text
+        self.font = set_font(20) # setting the font of the text
         self.create_widget()
         self.layout_widget()
 
@@ -109,14 +138,23 @@ class ButtonFrame(ctk.CTkFrame):
         self.button.configure( fg_color= "blue", height= 75)
        
     def layout_widget(self):
-         self.button.grid(row = 0, column= 0)
+         self.button.pack()
+    
+    def set_command(self, callback):
+        self.button.configure(command= callback)
 
 
 #----- Number of trials left ------
 class TrialFrame(ctk.CTkFrame):
+    """
+    Class containing the number of trial left text
+    methods: 
+        create_widget
+        layout_widget
+    """
     def __init__(self, root,**kwargs):
-        super().__init__(master= root, **kwargs)
-        self.font = ctk.CTkFont(family= "Poppins", size= 15) # setting the font of the text
+        super().__init__(master= root,**kwargs)
+        self.font = set_font(15)# setting the font of the text
         self.create_widget()
         self.layout_widget()
         
@@ -125,7 +163,7 @@ class TrialFrame(ctk.CTkFrame):
         self.text = ctk.CTkLabel(self, font= self.font)
 
     def layout_widget(self):
-        self.text.grid(row= 0, column= 0)
+        self.text.pack()
 
         
 # used this to test each class you add 
