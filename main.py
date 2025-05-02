@@ -8,12 +8,9 @@ features to add:
 - decrement the number of trials left after each unsuccessfull trial ❌
 - increment the score for successfull guesses ❌
 - display the score ✅
-- force the user to only enter integers ❌
+- force the user to only enter integers ✅
 - give hints to the user on how close they are to the true number ❌
 """
-
-
-
 
 
 #------ main app -------
@@ -23,26 +20,23 @@ class MainApp(ctk.CTk):
         self.title("Numgy")
         self.geometry("400x550+700+200") # window size and position
 
-        
-        # ---- Logic of the number guessing -----
-        MAX = 10
-        MIN = 0
-        self.toGuess = random.randint(MIN, MAX) # generation of the number to guess
-        self.score = 0
-        self.trials = 3
-        self.guess = None
+        # initialisation of the game
+        self.MIN, self.MAX = 0, 10 # range of values to guess
+        self.toGuess = random.randint(self.MIN, self.MAX) # generate value to guess
+        self.score = 0 # score initialized to 0
+        trials = 3 # 3 trials per game
 
         # ---- Variable text ----
-        display = ctk.StringVar(value= f"Guess a number between \n {MIN} and {MAX}") 
-        score = ctk.StringVar(value= f" Score: {self.score}")
-        trials = ctk.StringVar(value= f"Number of trials left: {self.trials}")
+        instruction = ctk.StringVar(value= f"Guess a number between \n {self.MIN} and {self.MAX}") 
+        self.score_text = ctk.StringVar(value= f" Score: {self.score}")
+        trials_text = ctk.StringVar(value= f"Number of trials left: {trials}")
         self.alertText = ctk.StringVar()
         
-
-        # Fame containing the text
+        # ---- Frame containing the text----
         self.textFrame = appUI.NumberGuessingFrame(self, fg_color= "#5f5f5f", corner_radius= 7)
-        self.textFrame.mainText.configure(textvariable = display) # displays the range within which the number lies
-        self.textFrame.scoreText.configure(textvariable = score)
+        # instructions giving the range within which the number lies and the score
+        self.textFrame.scoreText.configure(textvariable = self.score_text)
+        self.textFrame.mainText.configure(textvariable = instruction) 
         self.textFrame.grid_columnconfigure(0, weight= 1)
         self.textFrame.pack(fill= "both")
 
@@ -51,7 +45,7 @@ class MainApp(ctk.CTk):
             self,
             width= 175, 
             height= 75, 
-            placeholder_text="00",
+            placeholder_text="00", # default text
             justify= "center",
             font= ctk.CTkFont(family= "Poppins", size=100),
             fg_color= "transparent",
@@ -69,30 +63,48 @@ class MainApp(ctk.CTk):
         self.buttonFrame.pack(pady= (10, 0))
         self.buttonFrame.grid_columnconfigure(0, weight = 1)
         self.buttonFrame.grid_rowconfigure(0, weight= 1)
-        self.buttonFrame.button.configure(command= self.getText)
+        self.buttonFrame.button.configure(command= self.incrementScore)
 
         # Frame containing the number of trials left
         self.trial = appUI.TrialFrame(self, fg_color= "transparent", width= 40, height=20)
-        self.trial.text.configure(textvariable = trials)
+        self.trial.text.configure(textvariable = trials_text)
         self.trial.pack( pady= (5,0))
 
-    # just to test what happens in the terminal
+    # just to test what happens in the terself.MINal
     def getText(self):
         self.guess = self.UserText.get()
-        print(self.toGuess)  
-        print(self.guess)
-        self.alertText.set("alert")
-        self.UserText.delete(0, "end") 
+        try: 
+            int(self.guess)
+            print(self.toGuess)  
+            print(self.guess)
+            self.alertText.set("valid")
+            self.UserText.delete(0, "end") 
+        except ValueError:
+            self.alertText.set("You must enter an integer")
+            self.UserText.delete(0, "end") 
     
     # logic to implement later
     # def checkIntInput(self, func):
     #     pass
 
     
-    # def incrementScore(self):
-    #     if int(self.guess) == self.toGuess:
-    #         self.score += 1
-    #     print(self.score)
+    def incrementScore(self):
+        self.guess = self.UserText.get() # gets the value entered
+        try:
+            if int(self.guess) == self.toGuess:
+             self.score += 1 
+             self.toGuess = random.randint(self.MIN, self.MAX) # generate a new value if the user got the anser
+            else:
+                pass
+            self.alertText.set("") # nothing went wrong, so alert text should stay empty
+            self.UserText.delete(0, "end") # erases the texte entry
+            self.score_text.set(f"Score: {self.score}")
+            # ---- just to check what happens in the terself.MINal
+            print(self.guess)
+            print(self.toGuess)  
+        except ValueError:
+                self.alertText.set("You must enter an integer")
+                self.UserText.delete(0, "end") 
 
     
 
