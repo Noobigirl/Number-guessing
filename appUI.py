@@ -22,16 +22,8 @@ def set_font(size, family= DEFAULT_FONT):
     """
     return ctk.CTkFont(family= family, size= size)
 
-#-- not sure if I will need these two for now
-# def set_text(widget, text):
-#     widget.configure(text= text)
-
-# def set_variable_text(widget, text):
-#     widget.configure(textvariable = text)
-
 
 # ---- frame classes
-
 class NumberGuessingFrame(ctk.CTkFrame):
     """
     Class containing the score and the range of number to guess
@@ -115,7 +107,6 @@ class AlertFrame(ctk.CTkFrame):
          self.alertText.pack()
 
 
-
 #---- validation button ----
 class ButtonFrame(ctk.CTkFrame):
     """
@@ -134,7 +125,7 @@ class ButtonFrame(ctk.CTkFrame):
     def create_widget(self):
 
         # button itself
-        self.button = create_button(self, "Click me", self.font)
+        self.button = create_button(self, "Submit", self.font)
         self.button.configure( fg_color= "blue", height= 75)
        
     def layout_widget(self):
@@ -165,11 +156,4 @@ class TrialFrame(ctk.CTkFrame):
     def layout_widget(self):
         self.text.pack()
 
-        
-# used this to test each class you add 
-
-# App = ctk.CTk()
-# test = NumberGuessingFrame(App)
-# test.pack()
-# App.mainloop()
        

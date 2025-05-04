@@ -34,6 +34,7 @@ I tried to "improve" the look and added sections for the score, alerts and trial
 - pack() is better that grid() if I only want to place stuff on the "same column"
 - I can't use multiple geometry managers on the same master frame
 - It is a better practice to separate large programes into several modules that will be imported
+- I have learned how to use the validate an validatecommand attributes with the entry widget (I haven't fully mastered it though)
 
 
   
