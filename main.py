@@ -10,10 +10,10 @@ features to add:
 - display the score ✅
 - force the user to only enter integers ✅
 - give hints to the user on how close they are to the true number ✅
-- prevent the trial number from going below 0 ❌
+- prevent the trial number from going below 0 ✅
 - end the game when the number of tials reaches 0 ❌
-- increasing the difficulty and number of trials whe the use passes a level ❌
-- notify the user that the new value to guess is different when their get a correct answer ❌
+- increasing the difficulty and number of trials when the use passes a level ❌
+- notify the user that the new value to guess is different when their get a correct answer ✅
 - make a more appealing UI ❌
 """
 
@@ -76,6 +76,7 @@ class MainApp(ctk.CTk):
         and call the incrementScore() function
         -> None
         """
+
         self.guess = self.UserText.get()
         if self.guess.isdigit():
             self.guess = int(self.guess)
@@ -96,7 +97,8 @@ class MainApp(ctk.CTk):
         if self.guess == self.toGuess:
             self.score += 1 
             self.toGuess = random.randint(self.MIN, self.MAX) # generate a new value if the user got the answer
-            self.alertText.set("Correct!")
+            self.alertText.set("Correct!, guess a new number")
+
             # future feature: increase the range of value each time the user gets a correct answer
             self.score_text.set(f"Score: {self.score}") # displays new score
         else:
@@ -120,7 +122,7 @@ class MainApp(ctk.CTk):
         and updates the trial text
         -> None
         """
-        self.trials -=1
+        self.trials -= 1 if self.trials > 0 else 0
         self.trials_text.set(f"Number of trials left: {self.trials}")
     
     def input_validation(self, userInput):

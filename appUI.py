@@ -90,7 +90,7 @@ class AlertFrame(ctk.CTkFrame):
     """
     def __init__(self, root, **kwargs):
         super().__init__(master= root, **kwargs)
-        self.font = set_font(10)
+        self.font = set_font(13)
         self.create_widget()
         self.layout_widget()
 
@@ -123,7 +123,6 @@ class ButtonFrame(ctk.CTkFrame):
         self.layout_widget()
 
     def create_widget(self):
-
         # button itself
         self.button = create_button(self, "Submit", self.font)
         self.button.configure( fg_color= "blue", height= 75)
