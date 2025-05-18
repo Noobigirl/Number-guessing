@@ -155,4 +155,16 @@ class TrialFrame(ctk.CTkFrame):
     def layout_widget(self):
         self.text.pack()
 
-       
+
+class GameOver(ctk.CTkToplevel):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.font = set_font(10)
+        self.create_widget()
+        self.layout_widget()
+    
+    def create_widget(self):
+        self.text = create_label(self, self.font, text="GAME OVER")
+    
+    def layout_widget(self):
+        self.text.pack()

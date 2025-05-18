@@ -33,6 +33,7 @@ class MainApp(ctk.CTk):
         self.score = 0 # score initialized to 0
         self.trials = 3 # 3 trials per game
 
+
         # ---- Variable text ----
         instruction = ctk.StringVar(value=f"Guess a number between \n {self.MIN} and {self.MAX}") 
         self.score_text = ctk.StringVar(value= f" Score: {self.score}")
@@ -65,6 +66,8 @@ class MainApp(ctk.CTk):
         self.trial = appUI.TrialFrame(self, fg_color= "transparent", width= 40, height=20)
         self.trial.text.configure(textvariable = self.trials_text)
         self.trial.pack( pady= (5,0))
+
+
     
     def erase_txt(self):
         self.UserText.delete(0, "end") # erasing the entry 
@@ -124,6 +127,9 @@ class MainApp(ctk.CTk):
         """
         self.trials -= 1 if self.trials > 0 else 0
         self.trials_text.set(f"Number of trials left: {self.trials}")
+        # ending the game
+        if self.trials == 0:
+            self.game_over()
     
     def input_validation(self, userInput):
         """
@@ -131,6 +137,11 @@ class MainApp(ctk.CTk):
         -> bool
         """
         return True if len(userInput) <= 2 else False
+    
+    def game_over(self):
+        self.Game_over = appUI.GameOver()
+        # self.buttonFrame[state] = "disabled" # make the button unclickable after losing
+
 
     
 if __name__ == "__main__":
