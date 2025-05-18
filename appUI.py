@@ -124,8 +124,7 @@ class ButtonFrame(ctk.CTkFrame):
 
     def create_widget(self):
         # button itself
-        self.button = create_button(self, "Submit", self.font)
-        self.button.configure( fg_color= "blue", height= 75)
+        self.button = create_button(self, "Submit", self.font, fg_color= "blue", height= 75)
        
     def layout_widget(self):
          self.button.pack()
@@ -156,15 +155,30 @@ class TrialFrame(ctk.CTkFrame):
         self.text.pack()
 
 
-class GameOver(ctk.CTkToplevel):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.font = set_font(10)
+class GameOver(ctk.CTkFrame):
+    """
+    Class displaying the game over screen (frame)
+    methods:
+        create_widget
+        layout_widget
+        set_command
+    """
+    def __init__(self, root,*args, **kwargs):
+        super().__init__(root, *args, **kwargs)
+        self.font = set_font(30)
         self.create_widget()
         self.layout_widget()
+
+        
     
     def create_widget(self):
-        self.text = create_label(self, self.font, text="GAME OVER")
+        self.text = create_label(self, self.font, text="GAME OVER") 
+        # game over button, command will be set by restart in the main program
+        self.button = create_button(self, "Try Again", self.font)
     
     def layout_widget(self):
         self.text.pack()
+        self.button.pack()
+
+    def set_command(self, callback):
+        self.button.configure(command= callback)

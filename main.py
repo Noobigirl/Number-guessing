@@ -24,6 +24,8 @@ class MainApp(ctk.CTk):
         super().__init__()
         self.title("Numgy")
         self.geometry("400x550+700+200") # window size and position
+        self.container = ctk.CTkFrame(self)
+        self.container.pack(fill= "both")
         # -- validatecommand callback checking if the user enter at most a 2 digit number
         validation = self.register(self.input_validation) 
 
@@ -41,7 +43,7 @@ class MainApp(ctk.CTk):
         self.alertText = ctk.StringVar() # will only be set if the user must be notified of something
         
         # ---- Frame containing the text----
-        self.textFrame = appUI.NumberGuessingFrame(self, fg_color= "#5f5f5f", corner_radius= 0)
+        self.textFrame = appUI.NumberGuessingFrame(self.container, fg_color= "#5f5f5f", corner_radius= 0)
         self.textFrame.scoreText.configure(textvariable = self.score_text)
         self.textFrame.mainText.configure(textvariable = instruction) 
         self.textFrame.grid_columnconfigure(0, weight= 1)
@@ -49,21 +51,21 @@ class MainApp(ctk.CTk):
 
         # ---- User entry frame ----
         # The input is checked after value is entered and the full input is passed to our callback for validation
-        self.UserText = appUI.UserEntry(self, validate = "key", validatecommand = (validation, "%P"))
+        self.UserText = appUI.UserEntry(self.container, validate = "key", validatecommand = (validation, "%P"))
         self.UserText.pack(pady= (5, 0))
 
         #-----  Frame with Alert text ----
-        self.alert = appUI.AlertFrame(self, fg_color= "transparent")
+        self.alert = appUI.AlertFrame(self.container, fg_color= "transparent")
         self.alert.alertText.configure(textvariable= self.alertText)
         self.alert.pack(pady = (5, 0))
 
         # ---- Frame containing the button
-        self.buttonFrame = appUI.ButtonFrame(self)
+        self.buttonFrame = appUI.ButtonFrame(self.container)
         self.buttonFrame.set_command(self.getText)
         self.buttonFrame.pack(pady= (10, 0))
        
         # Frame containing the number of trials left
-        self.trial = appUI.TrialFrame(self, fg_color= "transparent", width= 40, height=20)
+        self.trial = appUI.TrialFrame(self.container, fg_color= "transparent", width= 40, height=20)
         self.trial.text.configure(textvariable = self.trials_text)
         self.trial.pack( pady= (5,0))
 
@@ -139,7 +141,9 @@ class MainApp(ctk.CTk):
         return True if len(userInput) <= 2 else False
     
     def game_over(self):
-        self.Game_over = appUI.GameOver()
+        self.Game_over = appUI.GameOver(self)
+        self.Game_over.pack()
+        self.Game_over.tkraise()
         # self.buttonFrame[state] = "disabled" # make the button unclickable after losing
 
 
