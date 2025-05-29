@@ -3,7 +3,7 @@
 Hi, I'm Benie Gouli—and this is my very first "serious" Python project!
 I'm using it to practice Git and GitHub, review core Python concepts, and dive into GUI development (I love GUIs!).
 
-**Numgy** is a simple number guessing game built with Python. The player has to guess a random number between 1 and 100.  
+**Numgy** is a simple number guessing game built with Python. The player has to guess a random number between 1 and 10.  
 It uses `customtkinter` to build a clean, modern interface (because, let’s be honest—`tkinter` is kinda outdated 😄).
 
 
